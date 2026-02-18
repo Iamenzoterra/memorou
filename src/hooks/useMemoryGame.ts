@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import type { CardData } from '../types'
-
-const DEFAULT_EMOJIS = ['🐶', '🐱', '🐼', '🦊', '🐸', '🐵', '🦁', '🐧']
+import type { CardData, Difficulty } from '../types'
+import { DIFFICULTY_CONFIGS } from '../types'
 
 function shuffle<T>(array: T[]): T[] {
   const arr = [...array]
@@ -23,7 +22,10 @@ function createCards(emojis: string[]): CardData[] {
   }))
 }
 
-export function useMemoryGame(emojis: string[] = DEFAULT_EMOJIS) {
+export function useMemoryGame(difficulty: Difficulty = 'medium') {
+  const config = DIFFICULTY_CONFIGS[difficulty]
+  const emojis = config.emojis
+
   const totalPairs = emojis.length
 
   const [cards, setCards] = useState<CardData[]>(() => createCards(emojis))
@@ -135,6 +137,8 @@ export function useMemoryGame(emojis: string[] = DEFAULT_EMOJIS) {
     setIsChecking(false)
   }, [emojis, stopTimer])
 
+  const starThresholds = config.stars
+
   return {
     cards,
     moves,
@@ -145,5 +149,6 @@ export function useMemoryGame(emojis: string[] = DEFAULT_EMOJIS) {
     isChecking,
     flipCard,
     restart,
+    starThresholds,
   }
 }
