@@ -21,11 +21,7 @@ export function GameBoard() {
   } = useMemoryGame()
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900">
-      <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
-        Memorou
-      </h1>
-
+    <div className="flex flex-col items-center">
       {/* Stats bar */}
       <div className="flex gap-4 md:gap-8 mb-6 text-sm md:text-base">
         <span className="bg-white/10 backdrop-blur-sm text-white px-3 py-1.5 rounded-lg font-medium">
